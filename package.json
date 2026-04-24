@@ -1,0 +1,44 @@
+{
+  "name": "ruthless",
+  "version": "0.1.0",
+  "description": "Opinionated product management skills for AI coding agents. Build the right thing.",
+  "keywords": [
+    "product-management",
+    "pm",
+    "discovery",
+    "strategy",
+    "skills",
+    "ai",
+    "claude-code",
+    "cursor",
+    "gemini",
+    "codex",
+    "agent-skills"
+  ],
+  "license": "Apache-2.0",
+  "author": "David Fernandez <fernandezdavideduardo@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandezdavid/ruthless.git"
+  },
+  "homepage": "https://github.com/fernandezdavid/ruthless",
+  "bugs": {
+    "url": "https://github.com/fernandezdavid/ruthless/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "clean": "rm -rf .claude/skills .cursor/skills .gemini/skills .codex/skills .agents/skills",
+    "rebuild": "npm run clean && npm run build"
+  },
+  "files": [
+    "source/",
+    "scripts/",
+    "LICENSE",
+    "NOTICE.md",
+    "README.md"
+  ]
+}
