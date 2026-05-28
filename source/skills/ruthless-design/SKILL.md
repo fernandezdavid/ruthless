@@ -202,27 +202,31 @@ The user can override at any time: *"skip the audit"*, *"just implement it"*. Wh
 
 ---
 
-## Complementary skills
+## Complementary skills (optional, external)
 
-These slot into specific phases as accelerators. Use them when a phase needs heavier work; the flow works without them.
+These are **optional accelerators** that live outside the Ruthless repo —
+mostly in [Impeccable](https://github.com/pbakaus/impeccable). The design
+flow works fully without them; use them when a phase needs heavier work
+and you happen to have the skill installed. If a referenced skill isn't
+installed in your agent, skip it and proceed with the in-flow guidance.
 
-| Phase | Skill | Use when |
-|-------|-------|----------|
-| 2 — PROTOTYPE | `{{command_prefix}}distill` | Variations are too cluttered; strip to essence |
-| 2 — PROTOTYPE | `{{command_prefix}}bolder` / `{{command_prefix}}quieter` | Wrong energy level for the brand |
-| 2 — PROTOTYPE | `{{command_prefix}}colorize` | Variation is too monochromatic |
-| 3 — SPEC | `{{command_prefix}}clarify` | Microcopy / labels / error messages need sharpening |
-| 4 — AUDIT-1 | `{{command_prefix}}critique` | Independent UX read on the spec |
-| 4 — AUDIT-1 | `{{command_prefix}}audit` | Comprehensive accessibility / responsive / theming check |
-| 4 — AUDIT-1 | `{{command_prefix}}extract` | Spot a new shared primitive that should land in the design system |
-| 5 — IMPLEMENT | `{{command_prefix}}normalize` | Ensure design-system consistency across the new code |
-| 5 — IMPLEMENT | `{{command_prefix}}harden` | Error handling, overflow, i18n, edge cases |
-| 5 — IMPLEMENT | `{{command_prefix}}adapt` | Confirm the surface works across screen sizes / orientations |
-| 5 — IMPLEMENT | `{{command_prefix}}animate` | Purposeful motion (only where it improves usability) |
-| 5 — IMPLEMENT | `{{command_prefix}}delight` | A small moment of personality (sparingly, on-brand) |
-| 6 — AUDIT-2 | `{{command_prefix}}polish` | Final alignment, spacing, consistency, detail pass |
-| 6 — AUDIT-2 | `{{command_prefix}}audit` | Final accessibility / performance pass |
-| 6 — AUDIT-2 | `{{command_prefix}}critique` | Fresh-eyes UX read on the live implementation |
+| Phase | Skill | Use when | Source |
+|-------|-------|----------|--------|
+| 2 — PROTOTYPE | `{{command_prefix}}distill` | Variations are too cluttered; strip to essence | Impeccable |
+| 2 — PROTOTYPE | `{{command_prefix}}bolder` / `{{command_prefix}}quieter` | Wrong energy level for the brand | Impeccable |
+| 2 — PROTOTYPE | `{{command_prefix}}colorize` | Variation is too monochromatic | Impeccable |
+| 3 — SPEC | `{{command_prefix}}clarify` | Microcopy / labels / error messages need sharpening | Impeccable |
+| 4 — AUDIT-1 | `{{command_prefix}}critique` | Independent UX read on the spec | Impeccable |
+| 4 — AUDIT-1 | `{{command_prefix}}audit` | Comprehensive accessibility / responsive / theming check | Impeccable |
+| 4 — AUDIT-1 | `{{command_prefix}}extract` | Spot a new shared primitive that should land in the design system | Impeccable |
+| 5 — IMPLEMENT | `{{command_prefix}}normalize` | Ensure design-system consistency across the new code | Impeccable |
+| 5 — IMPLEMENT | `{{command_prefix}}harden` | Error handling, overflow, i18n, edge cases | Impeccable |
+| 5 — IMPLEMENT | `{{command_prefix}}adapt` | Confirm the surface works across screen sizes / orientations | Impeccable |
+| 5 — IMPLEMENT | `{{command_prefix}}animate` | Purposeful motion (only where it improves usability) | Impeccable |
+| 5 — IMPLEMENT | `{{command_prefix}}delight` | A small moment of personality (sparingly, on-brand) | Impeccable |
+| 6 — AUDIT-2 | `{{command_prefix}}polish` | Final alignment, spacing, consistency, detail pass | Impeccable |
+| 6 — AUDIT-2 | `{{command_prefix}}audit` | Final accessibility / performance pass | Impeccable |
+| 6 — AUDIT-2 | `{{command_prefix}}critique` | Fresh-eyes UX read on the live implementation | Impeccable |
 
 Rules of thumb:
 - Never invoke more than 2–3 complementary skills per phase — each costs context.

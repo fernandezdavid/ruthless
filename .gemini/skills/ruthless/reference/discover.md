@@ -4,6 +4,8 @@ This stage answers: **who is this for, what's their problem, and what's the exte
 
 You enter Discover when Gate 1 (customer clarity) or Gate 2 (problem evidence) fails. You leave when both pass — you have a narrow, specific customer and evidence (not just opinion) that they have this problem urgently.
 
+> **This is project-level discovery, not feature-level.** For per-feature discovery (job-to-be-done, audit, signal, scope for one specific feature inside an already-positioned product), see `/ruthless-discovery` in the ship family.
+
 ---
 
 ## Core Discipline

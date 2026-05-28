@@ -84,6 +84,26 @@ After any change to `source/`, run `npm run build` and commit both the source
 edit and the regenerated provider outputs together. Reviewers will check that
 the two are consistent.
 
+## Skill families and naming
+
+Ruthless skills are organized into two families:
+
+- **Strategy** (`ruthless`) — the orchestrator that owns customer, problem,
+  strategic bet, positioning, MVP scoping. Installs the governance block.
+- **Ship family** (`ruthless-ship`, `ruthless-discovery`, `ruthless-design`,
+  `ruthless-teach-delivery`) — feature-level pipeline: discovery brief →
+  design + build → ship.
+
+**Naming convention** for any new skill in this repo:
+
+- Prefix with `ruthless-` so it clusters with the family in users' skill lists.
+- **Verbs** for skills that coordinate other skills (e.g. `ruthless-ship`).
+- **Nouns** for single-job skills (e.g. `ruthless-discovery`, `ruthless-design`).
+- No `-flow` suffix — every skill is a flow; the word adds noise.
+
+If a contribution doesn't fit either family cleanly, raise an issue first so
+we can talk through whether it belongs.
+
 ## Adding a New Skill
 
 1. Create `source/skills/<skill-name>/SKILL.md` with frontmatter:
@@ -96,17 +116,29 @@ the two are consistent.
    license: Apache 2.0
    ---
    ```
-2. Start the body with a **MANDATORY PREPARATION** block that invokes
-   `{{command_prefix}}ruthless` to load context, philosophy, and anti-patterns.
+2. **Decide which family the skill belongs to**, and write the body accordingly:
+   - **Strategy skills** assume Ruthless governance is already active in the
+     project (via the block in `{{config_file}}`) and `.ruthless.md` may exist.
+     They can link to other strategy reference files and the governance block;
+     they don't need a mandatory `ruthless` invocation.
+   - **Ship-family skills** read the `Delivery Conventions` block at startup
+     (installed by `{{command_prefix}}ruthless-teach-delivery`) and may read
+     `.ruthless.md` for strategic context. They cross-link to siblings rather
+     than mandatory-prep into `ruthless`.
 3. Add reference files as needed in `source/skills/<skill-name>/reference/*.md`.
-4. Run `npm run build` and verify outputs in each provider directory.
-5. Update the routing list in `source/skills/ruthless/SKILL.md` so the core
-   skill knows about the new one.
-6. Update the README's roadmap section.
+4. **Cross-link, don't centralize.** Reference siblings inline where it's
+   useful (e.g. ship-family skills already reference each other in their
+   startup sections). There is no central routing list to update.
+5. **Update the README's "What's Inside" section** so the skill appears in
+   either the Strategy or Ship-family table. If the skill warrants a separate
+   family, propose the new family structure in the PR.
+6. **For strategy skills**, also consider whether `source/skills/ruthless/reference/governance.md`
+   should mention the new skill (so governance can nudge agents toward it).
+7. Run `npm run build` and verify outputs in each provider directory.
 
 Match the existing quality bar: specificity over vagueness, explicit
-anti-patterns, mandatory preparation steps, quantitative criteria where
-possible. If the skill reads like generic PM advice, it's not ready.
+anti-patterns, gate-driven flow where appropriate, quantitative criteria
+where possible. If the skill reads like generic PM advice, it's not ready.
 
 ## Adding a New Provider
 

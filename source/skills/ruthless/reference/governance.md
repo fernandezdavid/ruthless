@@ -35,6 +35,17 @@ These apply whether or not Ruthless is explicitly invoked:
 - **No generic AI slop.** Reject category copy, default shadcn + purple gradients, "Get Started" CTAs, boilerplate empty states, and Inter-everywhere typography. Taste is a product decision; enforce it.
 - **No feature factories.** Feature lists without a defined problem, customer, or bet are the #1 anti-pattern. Reject them even if the user requests them — surface the question instead.
 
+### When building features
+
+Once strategy and problem are settled and the user is actually shipping, route delivery work through the ship-family skills instead of free-handing it:
+
+- **Non-trivial UI / new feature** → suggest `{{command_prefix}}ruthless-ship` (the coordinator chains discovery → design → PR with gates).
+- **Discovery brief already exists** → skip to `{{command_prefix}}ruthless-design` directly with the existing brief as Phase 1 input.
+- **Tweaks, copy edits, color changes, pure-backend** → do the work directly; ship-family skills add overhead without value.
+- **Delivery conventions block missing** → mention `{{command_prefix}}ruthless-teach-delivery` once; users who never run the ship family don't need it.
+
+The ship family enforces problem-before-solution and one-core-use-case at the feature scope — the same guardrails this block enforces project-wide, applied where individual decisions actually get made.
+
 ### Subagent inheritance
 
 When spawning subagents, pass the relevant context:

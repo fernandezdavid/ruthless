@@ -22,6 +22,14 @@ Also check for `.ruthless.md` — if present, read the wedge, customer, and cons
 
 **Coordinator**: `{{command_prefix}}ruthless-ship` chains both.
 
+> **Not the same as `{{command_prefix}}ruthless`'s Discover stage.** That one
+> asks the *project-level* questions (who is this product for, what problem
+> are we solving, where's the evidence). `ruthless-discovery` is *feature-level*
+> — it assumes you already know the answers and asks them again at the scope
+> of one feature. If you're not sure which to run: `{{command_prefix}}ruthless`
+> for "should this product exist", `{{command_prefix}}ruthless-discovery` for
+> "should this feature exist and what should it do".
+
 ---
 
 ## Scope auto-detection
@@ -228,17 +236,24 @@ Synthesize into a single committed brief at the project's discovery directory.
 
 ---
 
-## Complementary skills
+## Complementary skills (optional, external)
 
-| Phase | Skill | When |
-|-------|-------|------|
-| 3 — AUDIT | `{{command_prefix}}audit` | Comprehensive evaluation of existing surface |
-| 3 — AUDIT | `{{command_prefix}}critique` | UX read on existing surface |
-| 4 — POSITIONING | `{{command_prefix}}positioning-messaging` | Sharpening the value prop |
-| 5 — SIGNAL | `{{command_prefix}}reddit-scout` | Pulling user-language signal from Reddit |
-| 5 — SIGNAL | `{{command_prefix}}conducting-user-interviews` | If a fresh interview is warranted |
+These are **optional accelerators** that live outside the Ruthless repo —
+typically in [Impeccable](https://github.com/pbakaus/impeccable) or other
+skill packs you may have installed. The discovery flow works fully without
+them; use them when a phase needs heavier work and you happen to have the
+skill on hand.
 
-Optional accelerators — the skill works without them, but they're the right tool when a phase needs heavier work.
+| Phase | Skill | When | Source |
+|-------|-------|------|--------|
+| 3 — AUDIT | `{{command_prefix}}audit` | Comprehensive evaluation of existing surface | Impeccable |
+| 3 — AUDIT | `{{command_prefix}}critique` | UX read on existing surface | Impeccable |
+| 4 — POSITIONING | `{{command_prefix}}positioning-messaging` | Sharpening the value prop | external |
+| 5 — SIGNAL | `{{command_prefix}}reddit-scout` | Pulling user-language signal from Reddit | external |
+| 5 — SIGNAL | `{{command_prefix}}conducting-user-interviews` | If a fresh interview is warranted | external |
+
+If a referenced skill isn't installed in your agent, skip it and proceed with
+the in-flow guidance.
 
 ---
 
