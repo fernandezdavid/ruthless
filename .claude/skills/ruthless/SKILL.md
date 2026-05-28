@@ -335,6 +335,21 @@ Confirm completion and summarize the four load-bearing facts:
 
 These four guide every subsequent decision.
 
+### Offer to capture delivery conventions
+
+Ruthless captures *why* we ship. There's a sibling skill that captures *how* we ship — paths, primitives, test conventions, workflow tooling. The `ruthless-ship` family of skills (`ruthless-ship`, `ruthless-discovery`, `ruthless-design`) reads from a `Delivery Conventions` block in `CLAUDE.md` that this sibling installs.
+
+Check `CLAUDE.md` for `<!-- delivery:conventions:start` markers:
+
+- **Present**: mention briefly (*"Delivery Conventions block found, vN — active."*) and continue.
+- **Absent**: offer to chain into it:
+
+  > *"Ruthless captures the strategic context. There's a companion `/ruthless-teach-delivery` skill that captures the delivery conventions — where the design system lives, which test runner you use, what your load-bearing primitives are. Want to run it now? Takes ~10 minutes, and the ship-family skills will read its output to avoid re-deriving paths each session."*
+
+  If the user accepts, hand off to `/ruthless-teach-delivery`. If they decline or defer, continue — `ruthless-teach-delivery` can be run later on its own.
+
+This chain is **optional** but high-leverage. Ruthless does not require it; users who don't run the ship-family skills can skip it.
+
 ---
 
 ## Diagnose Mode
