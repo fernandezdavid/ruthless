@@ -12,7 +12,7 @@ A 7-phase pipeline with hard gates between each. The goal: minimize back-and-for
 
 ## Startup — read project conventions
 
-Before Phase 1, look for a `Delivery Conventions` block in `{{config_file}}` (markers: `<!-- delivery:conventions:start` / `end`). It tells you:
+Before Phase 1, look for a `Delivery Conventions` block in `{{config_file}}`{{config_file_note}} (markers: `<!-- delivery:conventions:start` / `end`). It tells you:
 - Where the design system lives (canonical visual source of truth)
 - Where engineering specs go
 - Where ADRs go

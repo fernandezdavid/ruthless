@@ -10,7 +10,7 @@ Scope-aware discovery pipeline. By the time you start designing, the strategic c
 
 ## Startup — read project conventions
 
-Before Phase 0, look for a `Delivery Conventions` block in `.cursorrules` (markers: `<!-- delivery:conventions:start` / `end`). It tells you where discovery briefs are stored in this project. If present, use that path. If absent, default to `docs/product/discovery/` and note the assumption to the user — they may want to run `/ruthless-teach-delivery` to capture conventions properly.
+Before Phase 0, look for a `Delivery Conventions` block in `AGENTS.md` (Cursor reads both `AGENTS.md` and `.cursorrules` — use whichever your project already has, or create `AGENTS.md` if neither exists) (markers: `<!-- delivery:conventions:start` / `end`). It tells you where discovery briefs are stored in this project. If present, use that path. If absent, default to `docs/product/discovery/` and note the assumption to the user — they may want to run `/ruthless-teach-delivery` to capture conventions properly.
 
 Also check for `.ruthless.md` — if present, read the wedge, customer, and constraints sections. They inform several discovery phases (especially Job-to-be-done, Positioning, and Scope).
 
@@ -75,7 +75,7 @@ Job-to-be-done statement:
 
 > *When [context], the [user] wants to [goal], so they can [outcome].*
 
-Draft 2–3 candidates, then ask the user to pick or refine. Recommendation = the one most aligned with the project's product wedge (read it from `.cursorrules` or the project's Ruthless `.ruthless.md` if present).
+Draft 2–3 candidates, then ask the user to pick or refine. Recommendation = the one most aligned with the project's product wedge (read it from `AGENTS.md` or the project's Ruthless `.ruthless.md` if present).
 
 Constraints — capture only the load-bearing ones:
 - Platform / form factor (phone-first, desktop, etc.)
@@ -114,7 +114,7 @@ Output structured findings:
 
 For surfaces that must convey value to a user — onboarding, intake, home, the site — sharpen the message before designing the layout.
 
-Anchor to the project's product wedge (read from `.cursorrules` or `.ruthless.md`).
+Anchor to the project's product wedge (read from `AGENTS.md` or `.ruthless.md`).
 
 Use `/positioning-messaging` for the heavy lifting.
 

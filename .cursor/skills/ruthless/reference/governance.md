@@ -2,7 +2,7 @@
 
 Ruthless doesn't just run when invoked. Once installed on a project, it becomes the PM layer — shaping how the model behaves on every product-adjacent decision, even when `/ruthless` isn't being explicitly called. This file defines how that governance is installed, verified, and maintained.
 
-The mechanism: a **governance block** written to `.cursorrules` at the project root. That file is loaded into context on every turn, so every product-adjacent request (new features, PRDs, roadmap, prioritization, positioning, UX copy) gets filtered through Ruthless's principles and anti-patterns automatically.
+The mechanism: a **governance block** written to `AGENTS.md` at the project root. That file is loaded into context on every turn, so every product-adjacent request (new features, PRDs, roadmap, prioritization, positioning, UX copy) gets filtered through Ruthless's principles and anti-patterns automatically.
 
 ---
 
@@ -11,7 +11,7 @@ The mechanism: a **governance block** written to `.cursorrules` at the project r
 This is the canonical block. The orchestrator installs, verifies, and updates it. When referring to "the governance block" elsewhere in Ruthless, this is what's meant.
 
 ````markdown
-<!-- ruthless:governance:start v1 -->
+<!-- ruthless:governance:start v2 -->
 ## Product Management — Governed by Ruthless
 
 This project's product decisions are governed by **Ruthless**, an opinionated PM skill system focused on zero-to-one work, discovery discipline, and one-core-use-case focus. Authoritative product context lives in `.ruthless.md`.
@@ -76,30 +76,30 @@ When installing the governance block (during `/ruthless teach` or during Phase 1
 
 ### Step 1: Check for existing block
 
-Read `.cursorrules`. Search for the markers:
+Read `AGENTS.md`. Search for the markers:
 
 - `<!-- ruthless:governance:start` — start marker (may be followed by a version like `v1`)
 - `<!-- ruthless:governance:end -->` — end marker
 
 **If both markers are present:**
 - Parse the version from the start marker
-- If version matches current (`v1`), the block is up to date — do nothing
-- If version is older, prompt the user: "Ruthless governance block is at [vX]; current version is [vY]. Update?" If yes, replace between markers with current block (preserving any manual edits requires user decision first).
+- If version matches current (`v2`), the block is up to date — do nothing
+- If version is older (e.g. `v1`), prompt the user: "Ruthless governance block is at [vX]; current version is [vY]. Update?" If yes, replace between markers with current block (preserving any manual edits requires user decision first). For `v1 → v2`, the material change is the new "When building features" subsection that routes delivery work through the ship-family skills.
 - If only one marker present or structure is malformed, treat as corrupted and offer to reinstall
 
 **If markers are absent and file exists:**
 - Append the governance block to the end of the file (with a blank line separator)
-- Notify the user: "Installed Ruthless governance block at end of .cursorrules."
+- Notify the user: "Installed Ruthless governance block at end of AGENTS.md."
 
 **If file does not exist:**
 - Create the file with just the governance block as content
-- Notify the user: "Created .cursorrules with the Ruthless governance block."
+- Notify the user: "Created AGENTS.md with the Ruthless governance block."
 
 ### Step 2: Confirm and explain
 
 After install or update, briefly tell the user what just happened and why:
 
-> I installed the Ruthless governance block in `.cursorrules`. This makes Ruthless the default PM layer for this project: any product-adjacent work (features, scope changes, positioning, roadmap) will now be filtered through the Ruthless principles and anti-patterns, even when `/ruthless` isn't explicitly invoked. You can view or edit it between the `ruthless:governance:start` / `end` markers. To remove it, delete the block.
+> I installed the Ruthless governance block in `AGENTS.md`. This makes Ruthless the default PM layer for this project: any product-adjacent work (features, scope changes, positioning, roadmap) will now be filtered through the Ruthless principles and anti-patterns, even when `/ruthless` isn't explicitly invoked. You can view or edit it between the `ruthless:governance:start` / `end` markers. To remove it, delete the block.
 
 Skip this notice if the block was already present and up to date.
 
@@ -110,7 +110,7 @@ Skip this notice if the block was already present and up to date.
 During the orchestrator's Ingest phase, verify:
 
 1. **`.ruthless.md` exists** and contains a valid Product Context section (all six required subsections). If not → run teach.
-2. **Governance block exists in `.cursorrules`** (markers present, version current). If not → offer to install/reinstall.
+2. **Governance block exists in `AGENTS.md`** (markers present, version current). If not → offer to install/reinstall.
 3. **Governance block is not corrupted** (content between markers matches expected structure). If corrupted, ask the user whether they intentionally edited it or whether it should be restored.
 
 If all three pass, proceed to Phase 2 or Phase 3 as appropriate.
@@ -154,13 +154,19 @@ When the agent is unsure whether an action is in scope, default to reading `.rut
 
 The governance block is versioned (`v1`, `v2`, ...) in its start marker. When the canonical block in this file changes materially, the version bumps. The orchestrator's install procedure handles migration.
 
-Current version: **v1**.
+Current version: **v2**.
+
+### Version history
+
+- **v2** — Added the "When building features" subsection that routes non-trivial UI/feature work through the ship-family skills (`ruthless-ship`, `ruthless-discovery`, `ruthless-design`) and mentions `ruthless-teach-delivery` for the delivery conventions block.
+- **v1** — Initial governance block.
 
 Material changes that warrant a version bump:
 - Adding or removing guardrails
 - Changing subagent inheritance rules
 - Changing the re-invocation instructions
 - Changing the override-logging behavior
+- Adding routing guidance that materially affects when skills get invoked
 
 Cosmetic changes (wording, formatting) don't require a version bump but should still be rolled out via reinstall if the user wants them.
 
@@ -170,6 +176,6 @@ Cosmetic changes (wording, formatting) don't require a version bump but should s
 
 Without governance, Ruthless is a skill the user has to remember to invoke. That's fine for discrete tasks, but it doesn't prevent derail. Users get caught up in building; features accrete without challenge; the strategy quietly drifts.
 
-With governance, Ruthless is always on. Every turn the model reads `.cursorrules`, it re-anchors on the principles and anti-patterns. Every subagent inherits the constraint. Every "let's add X" gets filtered through "what problem does X solve, and is that in `.ruthless.md`?" before implementation begins.
+With governance, Ruthless is always on. Every turn the model reads `AGENTS.md`, it re-anchors on the principles and anti-patterns. Every subagent inherits the constraint. Every "let's add X" gets filtered through "what problem does X solve, and is that in `.ruthless.md`?" before implementation begins.
 
-The cost is small — one block in `.cursorrules` — and the payoff is structural: the project stays on the rails even when the user's attention is elsewhere.
+The cost is small — one block in `AGENTS.md` — and the payoff is structural: the project stays on the rails even when the user's attention is elsewhere.

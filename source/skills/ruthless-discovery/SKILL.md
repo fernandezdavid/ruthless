@@ -12,7 +12,7 @@ Scope-aware discovery pipeline. By the time you start designing, the strategic c
 
 ## Startup — read project conventions
 
-Before Phase 0, look for a `Delivery Conventions` block in `{{config_file}}` (markers: `<!-- delivery:conventions:start` / `end`). It tells you where discovery briefs are stored in this project. If present, use that path. If absent, default to `docs/product/discovery/` and note the assumption to the user — they may want to run `{{command_prefix}}ruthless-teach-delivery` to capture conventions properly.
+Before Phase 0, look for a `Delivery Conventions` block in `{{config_file}}`{{config_file_note}} (markers: `<!-- delivery:conventions:start` / `end`). It tells you where discovery briefs are stored in this project. If present, use that path. If absent, default to `docs/product/discovery/` and note the assumption to the user — they may want to run `{{command_prefix}}ruthless-teach-delivery` to capture conventions properly.
 
 Also check for `.ruthless.md` — if present, read the wedge, customer, and constraints sections. They inform several discovery phases (especially Job-to-be-done, Positioning, and Scope).
 

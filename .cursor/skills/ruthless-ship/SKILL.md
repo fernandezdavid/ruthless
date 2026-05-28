@@ -10,12 +10,12 @@ Single entry point for non-trivial feature work. Chains the two sub-skills with 
 
 ## Startup — read project conventions
 
-Before doing anything else, look for a `Delivery Conventions` block in `.cursorrules` (markers: `<!-- delivery:conventions:start` / `end`). This block is installed by `/ruthless-teach-delivery` and tells you the project's paths (where discovery briefs go, where engineering specs live, where the design system is), test conventions, workflow tooling, and load-bearing primitives.
+Before doing anything else, look for a `Delivery Conventions` block in `AGENTS.md` (Cursor reads both `AGENTS.md` and `.cursorrules` — use whichever your project already has, or create `AGENTS.md` if neither exists) (markers: `<!-- delivery:conventions:start` / `end`). This block is installed by `/ruthless-teach-delivery` and tells you the project's paths (where discovery briefs go, where engineering specs live, where the design system is), test conventions, workflow tooling, and load-bearing primitives.
 
 - **Block present**: read it, use its values for the rest of the flow. Don't re-derive paths from scratch.
 - **Block absent**: offer to run `/ruthless-teach-delivery` first:
 
-  > *"No Delivery Conventions block in `.cursorrules` yet. Running `/ruthless-teach-delivery` first (10 min) will save context across this and future ship flows. Run it now, or proceed with sensible defaults and you'll fill in as we go?"*
+  > *"No Delivery Conventions block in `AGENTS.md` yet. Running `/ruthless-teach-delivery` first (10 min) will save context across this and future ship flows. Run it now, or proceed with sensible defaults and you'll fill in as we go?"*
 
   If the user declines, fall back to defaults (typical paths: `docs/product/discovery/`, `docs/engineering/`, `brand/design-system/`). Note explicitly in the conversation when you're using a default vs a captured convention so the user can correct.
 

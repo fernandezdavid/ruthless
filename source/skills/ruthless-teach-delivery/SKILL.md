@@ -8,7 +8,7 @@ license: Apache 2.0
 
 # Ruthless teach delivery
 
-A one-time interview that captures the *how-we-ship* layer of a project. Strategic context (why, for whom) lives in `.ruthless.md` via `{{command_prefix}}ruthless teach`. Design context (palette, typography, voice) lives in `{{config_file}}` via `{{command_prefix}}teach-impeccable` if installed. **This skill fills the gap between them**: the project conventions that delivery work depends on — where things live, how they're tested, how they ship.
+A one-time interview that captures the *how-we-ship* layer of a project. Strategic context (why, for whom) lives in `.ruthless.md` via `{{command_prefix}}ruthless teach`. Design context (palette, typography, voice) lives in `{{config_file}}`{{config_file_note}} via `{{command_prefix}}teach-impeccable` if installed. **This skill fills the gap between them**: the project conventions that delivery work depends on — where things live, how they're tested, how they ship.
 
 Without this, the `ruthless-ship` family of skills re-derives paths and conventions from scratch every session, wastes context, and drifts.
 

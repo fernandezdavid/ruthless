@@ -6,7 +6,7 @@ license: Apache 2.0
 
 # Ruthless teach delivery
 
-A one-time interview that captures the *how-we-ship* layer of a project. Strategic context (why, for whom) lives in `.ruthless.md` via `/ruthless teach`. Design context (palette, typography, voice) lives in `.cursorrules` via `/teach-impeccable` if installed. **This skill fills the gap between them**: the project conventions that delivery work depends on — where things live, how they're tested, how they ship.
+A one-time interview that captures the *how-we-ship* layer of a project. Strategic context (why, for whom) lives in `.ruthless.md` via `/ruthless teach`. Design context (palette, typography, voice) lives in `AGENTS.md` (Cursor reads both `AGENTS.md` and `.cursorrules` — use whichever your project already has, or create `AGENTS.md` if neither exists) via `/teach-impeccable` if installed. **This skill fills the gap between them**: the project conventions that delivery work depends on — where things live, how they're tested, how they ship.
 
 Without this, the `ruthless-ship` family of skills re-derives paths and conventions from scratch every session, wastes context, and drifts.
 
@@ -24,7 +24,7 @@ Without this, the `ruthless-ship` family of skills re-derives paths and conventi
 
 ## Inputs read at startup
 
-1. **`.cursorrules`** — check for existing `Delivery Conventions` block (markers below). Also check for an Impeccable design-context section to reference instead of re-asking.
+1. **`AGENTS.md`** — check for existing `Delivery Conventions` block (markers below). Also check for an Impeccable design-context section to reference instead of re-asking.
 2. **`.ruthless.md`** if present — read product wedge, target user, audience size. These inform some delivery choices (e.g. private alpha vs public release).
 3. **Repo cues** — scan for tells before asking:
    - `package.json` → test runner, framework
@@ -87,7 +87,7 @@ Capture file paths or class names so the audit gates can verify reuse.
 
 ## Output
 
-Write a clearly-marked block to `.cursorrules` (create the file if absent). Use these markers — the `ruthless-ship` family looks for them:
+Write a clearly-marked block to `AGENTS.md` (create the file if absent). Use these markers — the `ruthless-ship` family looks for them:
 
 ```markdown
 <!-- delivery:conventions:start v1 -->
@@ -144,17 +144,17 @@ The three teach skills are independent but complementary:
 
 ```
 ruthless teach              → why we ship          → .ruthless.md
-teach-impeccable            → how it looks         → .cursorrules#impeccable
-ruthless-teach-delivery     → how we ship          → .cursorrules#delivery
+teach-impeccable            → how it looks         → AGENTS.md#impeccable
+ruthless-teach-delivery     → how we ship          → AGENTS.md#delivery
 ```
 
 ## How to enter
 
 State explicitly: *"Running ruthless-teach-delivery."* Then walk through the 5 sections. For each, pre-fill from repo cues, surface recommendations, get confirmation.
 
-End by writing the block to `.cursorrules` and confirming with the user. Mention next steps:
+End by writing the block to `AGENTS.md` and confirming with the user. Mention next steps:
 
-> *"Delivery Conventions written to `.cursorrules`. The `/ruthless-ship` / `/ruthless-discovery` / `/ruthless-design` skills will now read this block at startup. Run `/ruthless-teach-delivery force` to refresh after major workflow changes."*
+> *"Delivery Conventions written to `AGENTS.md`. The `/ruthless-ship` / `/ruthless-discovery` / `/ruthless-design` skills will now read this block at startup. Run `/ruthless-teach-delivery force` to refresh after major workflow changes."*
 
 ## How to exit early
 

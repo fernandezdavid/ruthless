@@ -21,7 +21,7 @@ a fork or a companion project.
 **What's in scope:**
 - Sharper articulation of existing principles or anti-patterns
 - New anti-patterns backed by specific, observable failure cases
-- New specialized skills within the V1 roadmap (see README)
+- New specialized skills that fit the existing families (see "What's Inside" in the README)
 - Improvements to the build system or provider support
 - Bug fixes to placeholder handling, frontmatter generation, etc.
 
@@ -29,7 +29,10 @@ a fork or a companion project.
 - Generic PM framework documentation (RICE, MoSCoW, Jobs-to-be-Done deep dives)
   — unless they're framed against a specific anti-pattern
 - Growth PM content — Ruthless is tuned for zero-to-one
-- Composition with other skill packages — V1 stays self-contained
+- New skills whose value depends on a non-Ruthless skill pack being installed —
+  the repo itself stays self-contained. **Optional** references to external
+  packs (e.g. Impeccable accelerators in the ship-family Complementary skills
+  tables) are fine when the flow works without them.
 
 ## Repo Structure
 

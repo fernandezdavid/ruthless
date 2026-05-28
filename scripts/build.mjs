@@ -13,10 +13,13 @@
  *   - Agent Skills    → .agents/skills/  (generic standard; VS Code Copilot, etc.)
  *
  * Placeholders replaced per provider:
- *   - {{command_prefix}}  → `/` or `$`
- *   - {{model}}           → `Claude`, `Gemini`, `GPT`, `the model`, …
- *   - {{config_file}}     → `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, …
- *   - {{ask_instruction}} → provider-appropriate instruction for asking user
+ *   - {{command_prefix}}    → `/` or `$`
+ *   - {{model}}             → `Claude`, `Gemini`, `GPT`, `the model`, …
+ *   - {{config_file}}       → `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, …
+ *   - {{config_file_note}}  → empty for most providers; for Cursor, an
+ *                              inline parenthetical noting that
+ *                              `.cursorrules` is also valid
+ *   - {{ask_instruction}}   → provider-appropriate instruction for asking user
  *
  * Invocation:
  *   node scripts/build.mjs
@@ -43,6 +46,7 @@ const PROVIDERS = {
     placeholders: {
       model: 'Claude',
       config_file: 'CLAUDE.md',
+      config_file_note: '',
       ask_instruction: 'STOP and ask the user to clarify what you cannot infer.',
       command_prefix: '/',
     },
@@ -53,7 +57,8 @@ const PROVIDERS = {
     frontmatterFields: ['license'],
     placeholders: {
       model: 'the model',
-      config_file: '.cursorrules',
+      config_file: 'AGENTS.md',
+      config_file_note: ' (Cursor reads both `AGENTS.md` and `.cursorrules` — use whichever your project already has, or create `AGENTS.md` if neither exists)',
       ask_instruction: 'Ask the user directly to clarify what you cannot infer.',
       command_prefix: '/',
     },
@@ -65,6 +70,7 @@ const PROVIDERS = {
     placeholders: {
       model: 'Gemini',
       config_file: 'GEMINI.md',
+      config_file_note: '',
       ask_instruction: 'Ask the user directly to clarify what you cannot infer.',
       command_prefix: '/',
     },
@@ -76,6 +82,7 @@ const PROVIDERS = {
     placeholders: {
       model: 'GPT',
       config_file: 'AGENTS.md',
+      config_file_note: '',
       ask_instruction: 'Ask the user directly to clarify what you cannot infer.',
       command_prefix: '$',
     },
@@ -87,6 +94,7 @@ const PROVIDERS = {
     placeholders: {
       model: 'the model',
       config_file: 'AGENTS.md',
+      config_file_note: '',
       ask_instruction: 'Ask the user directly to clarify what you cannot infer.',
       command_prefix: '/',
     },
@@ -180,6 +188,7 @@ function applyPlaceholders(text, placeholders) {
     .replace(/\{\{command_prefix\}\}/g, placeholders.command_prefix)
     .replace(/\{\{model\}\}/g, placeholders.model)
     .replace(/\{\{config_file\}\}/g, placeholders.config_file)
+    .replace(/\{\{config_file_note\}\}/g, placeholders.config_file_note || '')
     .replace(/\{\{ask_instruction\}\}/g, placeholders.ask_instruction);
 }
 

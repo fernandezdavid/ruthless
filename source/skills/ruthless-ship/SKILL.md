@@ -12,7 +12,7 @@ Single entry point for non-trivial feature work. Chains the two sub-skills with 
 
 ## Startup — read project conventions
 
-Before doing anything else, look for a `Delivery Conventions` block in `{{config_file}}` (markers: `<!-- delivery:conventions:start` / `end`). This block is installed by `{{command_prefix}}ruthless-teach-delivery` and tells you the project's paths (where discovery briefs go, where engineering specs live, where the design system is), test conventions, workflow tooling, and load-bearing primitives.
+Before doing anything else, look for a `Delivery Conventions` block in `{{config_file}}`{{config_file_note}} (markers: `<!-- delivery:conventions:start` / `end`). This block is installed by `{{command_prefix}}ruthless-teach-delivery` and tells you the project's paths (where discovery briefs go, where engineering specs live, where the design system is), test conventions, workflow tooling, and load-bearing primitives.
 
 - **Block present**: read it, use its values for the rest of the flow. Don't re-derive paths from scratch.
 - **Block absent**: offer to run `{{command_prefix}}ruthless-teach-delivery` first:
