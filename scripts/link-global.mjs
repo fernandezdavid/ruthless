@@ -52,14 +52,10 @@ function parseArgs(argv) {
 
 function linkProvider(providerKey, force) {
   const cfg = PROVIDER_GLOBAL[providerKey];
-  if (!cfg) {
-    console.error(`✗ Unknown provider: ${providerKey}`);
-    return { linked: 0, skipped: 0, warned: 0 };
-  }
   const sourceDir = path.join(ROOT, cfg.source);
   if (!fs.existsSync(sourceDir)) {
-    console.warn(`⚠ ${providerKey}: source dir ${cfg.source} missing — run \`npm run build\` first.`);
-    return { linked: 0, skipped: 0, warned: 1 };
+    console.error(`✗ ${providerKey}: source dir ${cfg.source} missing — run \`npm run build\` first.`);
+    return { linked: 0, skipped: 0, warned: 0, failed: true };
   }
   fs.mkdirSync(cfg.global, { recursive: true });
 
@@ -103,7 +99,7 @@ function linkProvider(providerKey, force) {
     linked++;
   }
 
-  return { linked, skipped, warned };
+  return { linked, skipped, warned, failed: false };
 }
 
 function main() {
@@ -113,20 +109,29 @@ function main() {
   else if (args.provider) providers = [args.provider];
   else providers = DEFAULT_PROVIDERS;
 
+  const unknown = providers.filter((p) => !PROVIDER_GLOBAL[p]);
+  if (unknown.length > 0) {
+    console.error(`✗ Unknown provider(s): ${unknown.join(', ')}`);
+    console.error(`  Valid: ${Object.keys(PROVIDER_GLOBAL).join(', ')}, all`);
+    process.exit(1);
+  }
+
   console.log(`\nRuthless link-global — provider: ${providers.join(', ')}${args.force ? ' (--force)' : ''}\n`);
 
-  let totalLinked = 0, totalSkipped = 0, totalWarned = 0;
+  let totalLinked = 0, totalSkipped = 0, totalWarned = 0, anyFailed = false;
   for (const p of providers) {
-    const { linked, skipped, warned } = linkProvider(p, args.force);
+    const { linked, skipped, warned, failed } = linkProvider(p, args.force);
     totalLinked += linked;
     totalSkipped += skipped;
     totalWarned += warned;
+    if (failed) anyFailed = true;
   }
 
   console.log(`\nDone. ${totalLinked} linked · ${totalSkipped} already-linked · ${totalWarned} skipped.`);
   if (totalWarned > 0) {
     console.log(`Re-run with --force to overwrite the ${totalWarned} skipped target(s).`);
   }
+  if (anyFailed) process.exit(1);
 }
 
 main();

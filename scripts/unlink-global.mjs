@@ -43,10 +43,6 @@ function parseArgs(argv) {
 
 function unlinkProvider(providerKey) {
   const cfg = PROVIDER_GLOBAL[providerKey];
-  if (!cfg) {
-    console.error(`✗ Unknown provider: ${providerKey}`);
-    return { removed: 0, kept: 0, missing: 0 };
-  }
   const sourceDir = path.join(ROOT, cfg.source);
   if (!fs.existsSync(sourceDir) || !fs.existsSync(cfg.global)) {
     return { removed: 0, kept: 0, missing: 1 };
@@ -97,6 +93,13 @@ function main() {
   if (args.provider === 'all') providers = Object.keys(PROVIDER_GLOBAL);
   else if (args.provider) providers = [args.provider];
   else providers = DEFAULT_PROVIDERS;
+
+  const unknown = providers.filter((p) => !PROVIDER_GLOBAL[p]);
+  if (unknown.length > 0) {
+    console.error(`✗ Unknown provider(s): ${unknown.join(', ')}`);
+    console.error(`  Valid: ${Object.keys(PROVIDER_GLOBAL).join(', ')}, all`);
+    process.exit(1);
+  }
 
   console.log(`\nRuthless unlink-global — provider: ${providers.join(', ')}\n`);
 
