@@ -117,6 +117,12 @@ Any agent that reads the Agent Skills format should work with `.agents/`.
 If your agent expects a different layout, `source/` is the single source of
 truth — use the build system (below) to generate a custom provider output.
 
+> **Note on `npm install ruthless`**: the published npm package ships only
+> `source/` and `scripts/` — it does not place invocable skills anywhere on
+> its own. Use one of the two options above (clone+link or copy) so your
+> agent can actually find the skills. `npm install` is just a way to grab
+> the source if you don't want to clone the git repo.
+
 ---
 
 ## How to Use It
@@ -154,6 +160,24 @@ You only need to know one command. Ruthless figures out what you need.
 
 (Codex users: substitute `$ruthless` for `/ruthless`.)
 
+### Getting started on a new project
+
+A typical first-hour path:
+
+1. **Install all five skills** ([Installation](#installation) above).
+2. **Run `/ruthless teach`** — captures customer, problem, strategic bet,
+   constraints, anti-goals into `.ruthless.md` and installs the governance
+   block into your config file.
+3. **(Optional) Run `/ruthless-teach-delivery`** — captures *how* the project
+   ships (paths, test conventions, design system, load-bearing primitives)
+   into a Delivery Conventions block. Skip if the project isn't shipping
+   features yet.
+4. **For a non-trivial feature**, run `/ruthless-ship` — coordinates discovery
+   → design → PR with sign-off gates between each phase.
+
+For tweaks, copy edits, or pure-backend work, skip the ship family and just
+do the work — governance still applies via the config-file block.
+
 ---
 
 ## What's Inside
@@ -187,6 +211,27 @@ into Frankenstein delivery.
 The five skills cluster under the `ruthless-*` prefix so they're easy to
 spot in your skill list. Verbs indicate coordinators (`ruthless-ship`),
 nouns indicate single-job skills (`ruthless-discovery`, `ruthless-design`).
+
+The ship-family skills also reference **optional external accelerators**
+(things like `/distill`, `/audit`, `/positioning-messaging`) inside their
+Complementary skills tables. Those live in other skill packs (e.g.
+[Impeccable](https://github.com/pbakaus/impeccable)). The ship flow works
+fine without them — they're listed for users who already have them
+installed.
+
+### Two kinds of discovery — don't confuse them
+
+Ruthless has two things called "discovery" because they operate at different
+scales:
+
+| Concept | What it is | When to use |
+|---------|------------|-------------|
+| `/ruthless` **Discover stage** ([`reference/discover.md`](source/skills/ruthless/reference/discover.md)) | A *project-level* stage of the orchestrator. Narrows your customer, builds problem evidence, frames the market — the macro question of *who is this for and why*. | Early-stage projects. Run via `/ruthless` when Gate 1 (customer clarity) or Gate 2 (problem evidence) fails. |
+| `/ruthless-discovery` | A *feature-level* skill in the ship family. Produces a per-feature discovery brief (job-to-be-done, audit, signal, scope) that feeds the design phase. | When starting a non-trivial feature inside an already-positioned product. |
+
+If you're asking "should we build this product at all?" you want `/ruthless`.
+If you're asking "should we build *this feature* and how?" you want
+`/ruthless-discovery`.
 
 ---
 

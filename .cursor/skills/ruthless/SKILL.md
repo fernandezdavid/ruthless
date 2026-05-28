@@ -6,7 +6,7 @@ license: Apache 2.0
 
 This is Ruthless — your in-repo product manager.
 
-Once installed, Ruthless doesn't just run when invoked — it becomes the project's PM layer. It installs a governance block into `.cursorrules` so that every product-adjacent decision (new features, scope changes, positioning, roadmap, prioritization) gets filtered through Ruthless principles and anti-patterns *even when `/ruthless` isn't explicitly called*. Subagents inherit the governance. The project stays on the rails.
+Once installed, Ruthless doesn't just run when invoked — it becomes the project's PM layer. It installs a governance block into `AGENTS.md` (Cursor reads both `AGENTS.md` and `.cursorrules` — use whichever your project already has, or create `AGENTS.md` if neither exists) so that every product-adjacent decision (new features, scope changes, positioning, roadmap, prioritization) gets filtered through Ruthless principles and anti-patterns *even when `/ruthless` isn't explicitly called*. Subagents inherit the governance. The project stays on the rails.
 
 → *Governance template and install procedure in [reference/governance.md](reference/governance.md).*
 
@@ -38,7 +38,7 @@ Ruthless has three invocation modes. **Run without arguments for the full guided
 | Invocation                         | What it does                                                    |
 |------------------------------------|-----------------------------------------------------------------|
 | `/ruthless`       | **Full orchestration**: ingest → teach → diagnose → plan → execute. This is the main use case. Also verifies the governance block and offers to reinstall if missing. |
-| `/ruthless teach` | Capture product, customer, market, and constraint context (writes to `.ruthless.md`). **Also installs the Ruthless governance block in `.cursorrules` by default** so the project stays on the rails between explicit invocations. |
+| `/ruthless teach` | Capture product, customer, market, and constraint context (writes to `.ruthless.md`). **Also installs the Ruthless governance block in `AGENTS.md` by default** so the project stays on the rails between explicit invocations. |
 | `/ruthless diagnose` | Diagnose stage without executing. Returns a rubric score and recommended next step. |
 | `/ruthless continue`  | Resume the orchestrated flow where it left off (reads `.ruthless.md` state). |
 
@@ -59,7 +59,7 @@ Before asking the user anything, scan the repo and gather whatever context is al
 Look at, in order:
 
 1. **`.ruthless.md`** — if present, read the Product Context and any state from prior runs. If a prior diagnosis exists, note it but re-verify — code may have moved since.
-2. **.cursorrules** — if present, may contain a Product Context section and/or the Ruthless governance block (see Step 1.2).
+2. **AGENTS.md** — if present, may contain a Product Context section and/or the Ruthless governance block (see Step 1.2).
 3. **README.md / README** — stated purpose, audience, positioning attempts, status.
 4. **package.json / pyproject.toml / Cargo.toml / go.mod** — name, description, keywords, dependencies (tells you what's built).
 5. **Top-level directory structure** — what modules/features exist? What's the surface area?
@@ -78,16 +78,16 @@ If the repo is nearly empty (just scaffolding), say so — the user is likely pr
 
 → *See [reference/governance.md](reference/governance.md) for the canonical template, install procedure, and version handling.*
 
-Check `.cursorrules` for the Ruthless governance markers:
+Check `AGENTS.md` for the Ruthless governance markers:
 
-- `<!-- ruthless:governance:start` (may include a version like `v1`)
+- `<!-- ruthless:governance:start` (may include a version like `v2`)
 - `<!-- ruthless:governance:end -->`
 
 Decision tree:
 
-- **Both markers present, version current:** governance is installed and up to date. Mention it briefly ("Ruthless governance block found in `.cursorrules`, v1 — active.") and continue.
+- **Both markers present, version current:** governance is installed and up to date. Mention it briefly ("Ruthless governance block found in `AGENTS.md`, v2 — active.") and continue.
 - **Both markers present, version older:** offer to update. "Ruthless governance is at an older version. Update to current?" If yes, replace content between markers. If no, continue but note the drift.
-- **Markers missing and `.ruthless.md` has real content:** Ruthless was installed before but governance was removed (or never installed). Offer to (re)install: "No Ruthless governance block in `.cursorrules`. Install it so the project stays on the rails between `/ruthless` invocations?"
+- **Markers missing and `.ruthless.md` has real content:** Ruthless was installed before but governance was removed (or never installed). Offer to (re)install: "No Ruthless governance block in `AGENTS.md`. Install it so the project stays on the rails between `/ruthless` invocations?"
 - **Markers missing and `.ruthless.md` is also missing:** this is a first-time install. The governance block will be installed in Phase 2 (Teach). No action needed here.
 - **Markers malformed** (only one present, corrupted content): ask the user whether they intentionally edited it or whether it should be restored.
 
@@ -102,9 +102,9 @@ Check whether `.ruthless.md` contains a valid **Product Context** section with a
 
 Do not re-teach context you already have. Skip any section that's already filled in `.ruthless.md`.
 
-When teach writes `.ruthless.md`, it **also installs the governance block** in `.cursorrules` by default (see [reference/governance.md](reference/governance.md)). Tell the user you're doing this and why:
+When teach writes `.ruthless.md`, it **also installs the governance block** in `AGENTS.md` by default (see [reference/governance.md](reference/governance.md)). Tell the user you're doing this and why:
 
-> I'm installing the Ruthless governance block in `.cursorrules`. This makes Ruthless the persistent PM layer for this project — so every product-adjacent decision gets filtered through the principles and anti-patterns, even when `/ruthless` isn't explicitly invoked. You can view or edit it between the `ruthless:governance:start` / `end` markers, and remove it by deleting the block.
+> I'm installing the Ruthless governance block in `AGENTS.md`. This makes Ruthless the persistent PM layer for this project — so every product-adjacent decision gets filtered through the principles and anti-patterns, even when `/ruthless` isn't explicitly invoked. You can view or edit it between the `ruthless:governance:start` / `end` markers, and remove it by deleting the block.
 
 See the **Teach Mode** section further down for the full interview. Return here when done.
 
@@ -316,10 +316,10 @@ Synthesize into:
 
 Write to `.ruthless.md` at the project root. If the file exists, update in place — do not overwrite other sections (notably `## State`).
 
-**Then install the governance block** in `.cursorrules` (see [reference/governance.md](reference/governance.md) for the canonical template and install logic). This is not optional — it's how Ruthless becomes the persistent PM layer for the project. Follow the install procedure exactly:
+**Then install the governance block** in `AGENTS.md` (see [reference/governance.md](reference/governance.md) for the canonical template and install logic). This is not optional — it's how Ruthless becomes the persistent PM layer for the project. Follow the install procedure exactly:
 
 1. Check for existing `<!-- ruthless:governance:start` / `end` markers.
-2. If absent, append the governance block (with the current `v1` marker) to the end of `.cursorrules` (create the file if it doesn't exist).
+2. If absent, append the governance block (with the current `v1` marker) to the end of `AGENTS.md` (create the file if it doesn't exist).
 3. If present at current version, leave alone.
 4. If present at older version, offer to update.
 5. Briefly tell the user what you did and why.
@@ -335,9 +335,9 @@ These four guide every subsequent decision.
 
 ### Offer to capture delivery conventions
 
-Ruthless captures *why* we ship. There's a sibling skill that captures *how* we ship — paths, primitives, test conventions, workflow tooling. The `ruthless-ship` family of skills (`ruthless-ship`, `ruthless-discovery`, `ruthless-design`) reads from a `Delivery Conventions` block in `.cursorrules` that this sibling installs.
+Ruthless captures *why* we ship. There's a sibling skill that captures *how* we ship — paths, primitives, test conventions, workflow tooling. The `ruthless-ship` family of skills (`ruthless-ship`, `ruthless-discovery`, `ruthless-design`) reads from a `Delivery Conventions` block in `AGENTS.md` that this sibling installs.
 
-Check `.cursorrules` for `<!-- delivery:conventions:start` markers:
+Check `AGENTS.md` for `<!-- delivery:conventions:start` markers:
 
 - **Present**: mention briefly (*"Delivery Conventions block found, vN — active."*) and continue.
 - **Absent**: offer to chain into it:

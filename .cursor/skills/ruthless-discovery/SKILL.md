@@ -10,7 +10,7 @@ Scope-aware discovery pipeline. By the time you start designing, the strategic c
 
 ## Startup — read project conventions
 
-Before Phase 0, look for a `Delivery Conventions` block in `.cursorrules` (markers: `<!-- delivery:conventions:start` / `end`). It tells you where discovery briefs are stored in this project. If present, use that path. If absent, default to `docs/product/discovery/` and note the assumption to the user — they may want to run `/ruthless-teach-delivery` to capture conventions properly.
+Before Phase 0, look for a `Delivery Conventions` block in `AGENTS.md` (Cursor reads both `AGENTS.md` and `.cursorrules` — use whichever your project already has, or create `AGENTS.md` if neither exists) (markers: `<!-- delivery:conventions:start` / `end`). It tells you where discovery briefs are stored in this project. If present, use that path. If absent, default to `docs/product/discovery/` and note the assumption to the user — they may want to run `/ruthless-teach-delivery` to capture conventions properly.
 
 Also check for `.ruthless.md` — if present, read the wedge, customer, and constraints sections. They inform several discovery phases (especially Job-to-be-done, Positioning, and Scope).
 
@@ -19,6 +19,14 @@ Also check for `.ruthless.md` — if present, read the wedge, customer, and cons
 **Companion**: `/ruthless-design` for design + build phases.
 
 **Coordinator**: `/ruthless-ship` chains both.
+
+> **Not the same as `/ruthless`'s Discover stage.** That one
+> asks the *project-level* questions (who is this product for, what problem
+> are we solving, where's the evidence). `ruthless-discovery` is *feature-level*
+> — it assumes you already know the answers and asks them again at the scope
+> of one feature. If you're not sure which to run: `/ruthless`
+> for "should this product exist", `/ruthless-discovery` for
+> "should this feature exist and what should it do".
 
 ---
 
@@ -67,7 +75,7 @@ Job-to-be-done statement:
 
 > *When [context], the [user] wants to [goal], so they can [outcome].*
 
-Draft 2–3 candidates, then ask the user to pick or refine. Recommendation = the one most aligned with the project's product wedge (read it from `.cursorrules` or the project's Ruthless `.ruthless.md` if present).
+Draft 2–3 candidates, then ask the user to pick or refine. Recommendation = the one most aligned with the project's product wedge (read it from `AGENTS.md` or the project's Ruthless `.ruthless.md` if present).
 
 Constraints — capture only the load-bearing ones:
 - Platform / form factor (phone-first, desktop, etc.)
@@ -106,7 +114,7 @@ Output structured findings:
 
 For surfaces that must convey value to a user — onboarding, intake, home, the site — sharpen the message before designing the layout.
 
-Anchor to the project's product wedge (read from `.cursorrules` or `.ruthless.md`).
+Anchor to the project's product wedge (read from `AGENTS.md` or `.ruthless.md`).
 
 Use `/positioning-messaging` for the heavy lifting.
 
@@ -226,17 +234,24 @@ Synthesize into a single committed brief at the project's discovery directory.
 
 ---
 
-## Complementary skills
+## Complementary skills (optional, external)
 
-| Phase | Skill | When |
-|-------|-------|------|
-| 3 — AUDIT | `/audit` | Comprehensive evaluation of existing surface |
-| 3 — AUDIT | `/critique` | UX read on existing surface |
-| 4 — POSITIONING | `/positioning-messaging` | Sharpening the value prop |
-| 5 — SIGNAL | `/reddit-scout` | Pulling user-language signal from Reddit |
-| 5 — SIGNAL | `/conducting-user-interviews` | If a fresh interview is warranted |
+These are **optional accelerators** that live outside the Ruthless repo —
+typically in [Impeccable](https://github.com/pbakaus/impeccable) or other
+skill packs you may have installed. The discovery flow works fully without
+them; use them when a phase needs heavier work and you happen to have the
+skill on hand.
 
-Optional accelerators — the skill works without them, but they're the right tool when a phase needs heavier work.
+| Phase | Skill | When | Source |
+|-------|-------|------|--------|
+| 3 — AUDIT | `/audit` | Comprehensive evaluation of existing surface | Impeccable |
+| 3 — AUDIT | `/critique` | UX read on existing surface | Impeccable |
+| 4 — POSITIONING | `/positioning-messaging` | Sharpening the value prop | external |
+| 5 — SIGNAL | `/reddit-scout` | Pulling user-language signal from Reddit | external |
+| 5 — SIGNAL | `/conducting-user-interviews` | If a fresh interview is warranted | external |
+
+If a referenced skill isn't installed in your agent, skip it and proceed with
+the in-flow guidance.
 
 ---
 

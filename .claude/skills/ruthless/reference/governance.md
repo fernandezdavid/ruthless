@@ -11,7 +11,7 @@ The mechanism: a **governance block** written to `CLAUDE.md` at the project root
 This is the canonical block. The orchestrator installs, verifies, and updates it. When referring to "the governance block" elsewhere in Ruthless, this is what's meant.
 
 ````markdown
-<!-- ruthless:governance:start v1 -->
+<!-- ruthless:governance:start v2 -->
 ## Product Management — Governed by Ruthless
 
 This project's product decisions are governed by **Ruthless**, an opinionated PM skill system focused on zero-to-one work, discovery discipline, and one-core-use-case focus. Authoritative product context lives in `.ruthless.md`.
@@ -34,6 +34,17 @@ These apply whether or not Ruthless is explicitly invoked:
 - **No imagined customers.** Any claim about what customers want must be sourced to evidence in `.ruthless.md`. Unsourced claims get flagged as hypotheses to validate.
 - **No generic AI slop.** Reject category copy, default shadcn + purple gradients, "Get Started" CTAs, boilerplate empty states, and Inter-everywhere typography. Taste is a product decision; enforce it.
 - **No feature factories.** Feature lists without a defined problem, customer, or bet are the #1 anti-pattern. Reject them even if the user requests them — surface the question instead.
+
+### When building features
+
+Once strategy and problem are settled and the user is actually shipping, route delivery work through the ship-family skills instead of free-handing it:
+
+- **Non-trivial UI / new feature** → suggest `/ruthless-ship` (the coordinator chains discovery → design → PR with gates).
+- **Discovery brief already exists** → skip to `/ruthless-design` directly with the existing brief as Phase 1 input.
+- **Tweaks, copy edits, color changes, pure-backend** → do the work directly; ship-family skills add overhead without value.
+- **Delivery conventions block missing** → mention `/ruthless-teach-delivery` once; users who never run the ship family don't need it.
+
+The ship family enforces problem-before-solution and one-core-use-case at the feature scope — the same guardrails this block enforces project-wide, applied where individual decisions actually get made.
 
 ### Subagent inheritance
 
@@ -72,8 +83,8 @@ Read `CLAUDE.md`. Search for the markers:
 
 **If both markers are present:**
 - Parse the version from the start marker
-- If version matches current (`v1`), the block is up to date — do nothing
-- If version is older, prompt the user: "Ruthless governance block is at [vX]; current version is [vY]. Update?" If yes, replace between markers with current block (preserving any manual edits requires user decision first).
+- If version matches current (`v2`), the block is up to date — do nothing
+- If version is older (e.g. `v1`), prompt the user: "Ruthless governance block is at [vX]; current version is [vY]. Update?" If yes, replace between markers with current block (preserving any manual edits requires user decision first). For `v1 → v2`, the material change is the new "When building features" subsection that routes delivery work through the ship-family skills.
 - If only one marker present or structure is malformed, treat as corrupted and offer to reinstall
 
 **If markers are absent and file exists:**
@@ -143,13 +154,19 @@ When the agent is unsure whether an action is in scope, default to reading `.rut
 
 The governance block is versioned (`v1`, `v2`, ...) in its start marker. When the canonical block in this file changes materially, the version bumps. The orchestrator's install procedure handles migration.
 
-Current version: **v1**.
+Current version: **v2**.
+
+### Version history
+
+- **v2** — Added the "When building features" subsection that routes non-trivial UI/feature work through the ship-family skills (`ruthless-ship`, `ruthless-discovery`, `ruthless-design`) and mentions `ruthless-teach-delivery` for the delivery conventions block.
+- **v1** — Initial governance block.
 
 Material changes that warrant a version bump:
 - Adding or removing guardrails
 - Changing subagent inheritance rules
 - Changing the re-invocation instructions
 - Changing the override-logging behavior
+- Adding routing guidance that materially affects when skills get invoked
 
 Cosmetic changes (wording, formatting) don't require a version bump but should still be rolled out via reinstall if the user wants them.
 

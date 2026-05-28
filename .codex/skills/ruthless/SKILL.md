@@ -81,12 +81,12 @@ If the repo is nearly empty (just scaffolding), say so — the user is likely pr
 
 Check `AGENTS.md` for the Ruthless governance markers:
 
-- `<!-- ruthless:governance:start` (may include a version like `v1`)
+- `<!-- ruthless:governance:start` (may include a version like `v2`)
 - `<!-- ruthless:governance:end -->`
 
 Decision tree:
 
-- **Both markers present, version current:** governance is installed and up to date. Mention it briefly ("Ruthless governance block found in `AGENTS.md`, v1 — active.") and continue.
+- **Both markers present, version current:** governance is installed and up to date. Mention it briefly ("Ruthless governance block found in `AGENTS.md`, v2 — active.") and continue.
 - **Both markers present, version older:** offer to update. "Ruthless governance is at an older version. Update to current?" If yes, replace content between markers. If no, continue but note the drift.
 - **Markers missing and `.ruthless.md` has real content:** Ruthless was installed before but governance was removed (or never installed). Offer to (re)install: "No Ruthless governance block in `AGENTS.md`. Install it so the project stays on the rails between `$ruthless` invocations?"
 - **Markers missing and `.ruthless.md` is also missing:** this is a first-time install. The governance block will be installed in Phase 2 (Teach). No action needed here.

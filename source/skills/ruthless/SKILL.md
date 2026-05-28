@@ -8,7 +8,7 @@ license: Apache 2.0
 
 This is Ruthless — your in-repo product manager.
 
-Once installed, Ruthless doesn't just run when invoked — it becomes the project's PM layer. It installs a governance block into `{{config_file}}` so that every product-adjacent decision (new features, scope changes, positioning, roadmap, prioritization) gets filtered through Ruthless principles and anti-patterns *even when `{{command_prefix}}ruthless` isn't explicitly called*. Subagents inherit the governance. The project stays on the rails.
+Once installed, Ruthless doesn't just run when invoked — it becomes the project's PM layer. It installs a governance block into `{{config_file}}`{{config_file_note}} so that every product-adjacent decision (new features, scope changes, positioning, roadmap, prioritization) gets filtered through Ruthless principles and anti-patterns *even when `{{command_prefix}}ruthless` isn't explicitly called*. Subagents inherit the governance. The project stays on the rails.
 
 → *Governance template and install procedure in [reference/governance.md](reference/governance.md).*
 
@@ -82,12 +82,12 @@ If the repo is nearly empty (just scaffolding), say so — the user is likely pr
 
 Check `{{config_file}}` for the Ruthless governance markers:
 
-- `<!-- ruthless:governance:start` (may include a version like `v1`)
+- `<!-- ruthless:governance:start` (may include a version like `v2`)
 - `<!-- ruthless:governance:end -->`
 
 Decision tree:
 
-- **Both markers present, version current:** governance is installed and up to date. Mention it briefly ("Ruthless governance block found in `{{config_file}}`, v1 — active.") and continue.
+- **Both markers present, version current:** governance is installed and up to date. Mention it briefly ("Ruthless governance block found in `{{config_file}}`, v2 — active.") and continue.
 - **Both markers present, version older:** offer to update. "Ruthless governance is at an older version. Update to current?" If yes, replace content between markers. If no, continue but note the drift.
 - **Markers missing and `.ruthless.md` has real content:** Ruthless was installed before but governance was removed (or never installed). Offer to (re)install: "No Ruthless governance block in `{{config_file}}`. Install it so the project stays on the rails between `{{command_prefix}}ruthless` invocations?"
 - **Markers missing and `.ruthless.md` is also missing:** this is a first-time install. The governance block will be installed in Phase 2 (Teach). No action needed here.
