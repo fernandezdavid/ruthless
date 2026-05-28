@@ -48,68 +48,74 @@ product lens:
 
 ## Installation
 
-Pick your agent below. Each provider has a pre-built skills directory in this
-repo — copy it into your project (or your user config) and the agent
-discovers it automatically.
+Ruthless ships **five skills** that work together (see [What's Inside](#whats-inside)).
+Install them all — they reference each other.
 
-### Claude Code
+### Option A: Clone + symlink globally (recommended)
 
-Copy `.claude/skills/ruthless/` into your project:
-
-```bash
-cp -r .claude/skills/ruthless/ /path/to/your/project/.claude/skills/
-```
-
-Or install globally for all projects:
+If you want the skills available in every project on your machine, and
+updates to propagate when you `git pull`:
 
 ```bash
-cp -r .claude/skills/ruthless/ ~/.claude/skills/
+git clone https://github.com/fernandezdavid/ruthless.git
+cd ruthless
+npm install              # no runtime deps
+npm run link-global      # symlinks all skills into ~/.claude/skills + ~/.codex/skills
 ```
 
-Then, in Claude Code:
-
-```
-/ruthless teach
-```
-
-### Cursor
+Other npm scripts:
 
 ```bash
-cp -r .cursor/skills/ruthless/ /path/to/your/project/.cursor/skills/
+npm run link-global:all      # also link Cursor, Gemini, and the generic Agent dirs
+npm run link-global:force    # overwrite an existing entry
+npm run unlink-global        # remove the symlinks
+npm run unlink-global:all    # remove from every provider directory
 ```
 
-Invoke: `/ruthless teach`
+### Option B: Copy into a single project
 
-### Gemini CLI
+Each provider directory at the repo root contains the full set of skills.
+Copy whichever provider matches your agent:
 
 ```bash
-cp -r .gemini/skills/ruthless/ /path/to/your/project/.gemini/skills/
+# Claude Code
+cp -r .claude/skills/. /path/to/your/project/.claude/skills/
+
+# Cursor
+cp -r .cursor/skills/. /path/to/your/project/.cursor/skills/
+
+# Gemini CLI
+cp -r .gemini/skills/. /path/to/your/project/.gemini/skills/
+
+# Codex CLI
+cp -r .codex/skills/. /path/to/your/project/.codex/skills/
+
+# Generic Agent Skills (VS Code Copilot, others)
+cp -r .agents/skills/. /path/to/your/project/.agents/skills/
 ```
 
-Invoke: `/ruthless teach`
+The trailing `.` matters — it copies the *contents* of the directory so all
+five skills land directly under your project's `skills/` folder.
 
-### Codex CLI
+### Then invoke Ruthless
 
-```bash
-cp -r .codex/skills/ruthless/ /path/to/your/project/.codex/skills/
+In Claude Code, Cursor, Gemini, or any `/`-prefix agent:
+
+```
+/ruthless
 ```
 
-Invoke: `$ruthless teach`  (Codex uses `$` as the command prefix)
+In Codex (which uses `$` as the command prefix):
 
-### Agent Skills (VS Code Copilot, others)
-
-```bash
-cp -r .agents/skills/ruthless/ /path/to/your/project/.agents/skills/
+```
+$ruthless
 ```
 
-Invoke: `/ruthless teach`
+### Other agents
 
-### Other Agents
-
-Any agent that reads Agent Skills format should work with the `.agents/`
-directory. If your agent expects a different layout, the `source/` directory
-is the single source of truth — use the build system (below) to generate a
-custom provider output.
+Any agent that reads the Agent Skills format should work with `.agents/`.
+If your agent expects a different layout, `source/` is the single source of
+truth — use the build system (below) to generate a custom provider output.
 
 ---
 
@@ -152,24 +158,35 @@ You only need to know one command. Ruthless figures out what you need.
 
 ## What's Inside
 
-V1 ships **one skill** with **ten reference files** covering every stage of
-the flow:
+Ruthless ships **five skills** in two families:
 
-- `principles.md` — the seven core beliefs Ruthless operates from
-- `anti-patterns.md` — the 18-pattern PM slop catalog with rewrites
-- `zero-to-one.md` — why 0→1 is a different game than growth PM
-- `diagnose.md` — the six-gate rubric and stage classification
-- `discover.md` — customer, market, and competitive discovery
-- `validate.md` — experiment design for the riskiest assumption
-- `strategy.md` — the strategy doc format (with a required "Not Doing" section)
-- `position.md` — distinctive positioning in one sentence
-- `shape.md` — MVP scoping for one and only one core use case, with taste
-- `challenge.md` — systematic stress-test against anti-patterns
+### Strategy
 
-The orchestrator in `/ruthless` loads the right reference file on demand as
-you move through stages. In future releases, each stage reference may be
-promoted to its own direct-invocable skill (`/shape`, `/discover`, etc.) for
-users who want to jump ahead.
+| Skill | What it does |
+|-------|--------------|
+| `/ruthless` | The PM layer. Installs governance into your config file, captures product context, diagnoses what stage you're at (discovery, validation, strategy, positioning, MVP scoping, execution), and drives you through one stage at a time. **Start here.** |
+
+The `ruthless` skill comes with ten reference files (`principles.md`,
+`anti-patterns.md`, `zero-to-one.md`, `diagnose.md`, `discover.md`,
+`validate.md`, `strategy.md`, `position.md`, `shape.md`, `challenge.md`)
+that the orchestrator loads on demand.
+
+### Ship family
+
+Once you've decided *what* to build, the ship family helps you do it well —
+gate-driven, with explicit discovery and design steps so you don't slide
+into Frankenstein delivery.
+
+| Skill | What it does |
+|-------|--------------|
+| `/ruthless-ship` | End-to-end coordinator: chains discovery → user sign-off → design → PR. The canonical entry point for non-trivial features. |
+| `/ruthless-discovery` | Produces a strategic discovery brief (job-to-be-done, audit, positioning, signal, competitive scan, success metrics, scope) that feeds the design phase. |
+| `/ruthless-design` | A 7-phase pipeline (frame → prototype → spec → audit → implement → audit → ship) with hard gates between each. |
+| `/ruthless-teach-delivery` | One-time interview that captures *how* this project ships — paths, primitives, test conventions, workflow tooling — into a `Delivery Conventions` block. The other ship-family skills read it at startup. |
+
+The five skills cluster under the `ruthless-*` prefix so they're easy to
+spot in your skill list. Verbs indicate coordinators (`ruthless-ship`),
+nouns indicate single-job skills (`ruthless-discovery`, `ruthless-design`).
 
 ---
 
@@ -230,13 +247,16 @@ full workflow.
 
 ```
 ruthless/
-├── source/skills/ruthless/       ← source of truth
-│   ├── SKILL.md
-│   └── reference/
-│       ├── anti-patterns.md
-│       ├── principles.md
-│       └── zero-to-one.md
-├── scripts/build.mjs             ← transform source → providers
+├── source/skills/                ← source of truth
+│   ├── ruthless/                   strategy (with reference/*.md)
+│   ├── ruthless-ship/              ship-family coordinator
+│   ├── ruthless-discovery/         discovery brief
+│   ├── ruthless-design/            design + build pipeline (with reference/*.md)
+│   └── ruthless-teach-delivery/    one-time conventions interview
+├── scripts/
+│   ├── build.mjs                 ← transform source → providers
+│   ├── link-global.mjs           ← symlink built skills into ~/.<provider>/skills/
+│   └── unlink-global.mjs
 ├── .claude/ .cursor/ .gemini/    ← generated outputs (committed)
 ├── .codex/ .agents/
 ├── package.json

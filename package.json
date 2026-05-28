@@ -32,7 +32,12 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "clean": "rm -rf .claude/skills .cursor/skills .gemini/skills .codex/skills .agents/skills",
-    "rebuild": "npm run clean && npm run build"
+    "rebuild": "npm run clean && npm run build",
+    "link-global": "node scripts/link-global.mjs",
+    "link-global:all": "node scripts/link-global.mjs --provider=all",
+    "link-global:force": "node scripts/link-global.mjs --force",
+    "unlink-global": "node scripts/unlink-global.mjs",
+    "unlink-global:all": "node scripts/unlink-global.mjs --provider=all"
   },
   "files": [
     "source/",
