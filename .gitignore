@@ -17,3 +17,7 @@ node_modules/
 # are NOT ignored. They are committed so users can install Ruthless by copying
 # them directly without needing to run the build system. Only user-specific
 # local settings files within them are ignored (see above).
+
+# Internal working docs — used to plan follow-up work but not part of the
+# distributed repo. Keep in the working tree, never commit.
+FOLLOW_UP.md
